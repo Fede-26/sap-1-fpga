@@ -12,7 +12,7 @@ end entity sap_1_top;
 architecture rtl of sap_1_top is
     signal w_Clk : std_logic;
     signal r_Clk_En : std_logic;
-begin
+begin  
 
     -- Generate the clock signal using a divider
     Clock_Inst : entity work.clock_divider
@@ -25,7 +25,5 @@ begin
             o_Clk => w_Clk,
             i_Reset => '0'
         );
-
-    
 
 end rtl;
