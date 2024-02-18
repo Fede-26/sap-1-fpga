@@ -5,9 +5,16 @@
 
 This is a VHDL implementation of the Simple As Possible (SAP-1) computer. The SAP-1 is a simple 8-bit computer with a 16-byte memory, designed by Albert Paul Malvino and Jerald A. Brown.
 
+## What is implemented
+
+- [x] 8-bit ALU
+- [x] 8-bit Registers (A, B)
+- [x] 4-bit RAM
+
 ## Hardware
 
 This repo uses the Sipeed Tang Nano 9k board and the Gowin EDA.
+
 It uses VUnit for testing and GHDL for simulation.
 
 ## Getting Started
