@@ -1,8 +1,15 @@
-runs-on: ubuntu-latest
-steps:
+name: VUnit Tests
 
-- uses: actions/checkout@v2
+on:
+  push:
+  pull_request:
 
-- uses: VUnit/vunit_action@master
-  with:
-    cmd: run.py
+jobs:
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+
+      - uses: actions/checkout@v2
+
+      - uses: VUnit/vunit_action@master
