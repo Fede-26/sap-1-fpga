@@ -30,10 +30,10 @@ begin
             r_Counter <= r_Counter + 1;
             if (r_Counter = DIVIDER/2) then
                 r_Clk <= not r_Clk;
-                r_Counter <= 0;
+                r_Counter <= 1;
             end if;
         end if;
-        o_Clk <= r_Clk;
     end process;
-
+    o_Clk <= r_Clk;
+    
 end rtl;
