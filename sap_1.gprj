@@ -5,6 +5,7 @@
     <Version>5</Version>
     <Device name="GW1NR-9C" pn="GW1NR-LV9QN88PC6/I5">gw1nr9c-004</Device>
     <FileList>
-        <File path="src/sap_1_top.vhd" type="file.vhdl" enable="1"/>
+        <File path="src/Clock_Divider.vhd" type="file.vhdl" enable="1"/>
+        <File path="src/SAP_1_Top.vhd" type="file.vhdl" enable="1"/>
     </FileList>
 </Project>
