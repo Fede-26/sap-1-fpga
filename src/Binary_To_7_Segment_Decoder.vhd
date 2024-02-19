@@ -7,7 +7,9 @@ entity Binary_To_7_Segment_Decoder is
         i_Clk : in std_logic; -- Clock
         i_Num : in std_logic_vector(15 downto 0); -- 4 Digit hex number
         o_D1, o_D2, o_D3, o_D4 : out std_logic; -- 7 segment display selector
-        o_A, o_B, o_C, o_D, o_E, o_F, o_G : out std_logic -- 7 segment display segments
+        o_A, o_B, o_C, o_D, o_E, o_F, o_G : out std_logic; -- 7 segment display segments
+        o_Dot : out std_logic; -- Decimal separator
+        i_Dot : in std_logic_vector(3 downto 0) -- Decimal separator (used to display two numbers at the same time)
     );
 end Binary_To_7_Segment_Decoder;
 
@@ -67,6 +69,9 @@ begin
     o_E <= w_Output(2);
     o_F <= w_Output(1);
     o_G <= w_Output(0);
+
+    -- Decimal separator
+    o_Dot <= i_Dot(to_integer(unsigned(r_Current_Viewing_Digit)));
 
     process (i_Clk)
     begin

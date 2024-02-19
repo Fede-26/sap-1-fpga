@@ -23,7 +23,8 @@ begin
         i_Clk => r_Clk, -- Clock
         i_Num => r_Num, -- 4 Digit hex number
         o_D1 => w_D1, o_D2 => w_D2, o_D3 => w_D3, o_D4 => w_D4, -- 7 segment display selector
-        o_A => w_A, o_B => w_B, o_C => w_C, o_D => w_D, o_E => w_E, o_F => w_F, o_G => w_G -- 7 segment display segments
+        o_A => w_A, o_B => w_B, o_C => w_C, o_D => w_D, o_E => w_E, o_F => w_F, o_G => w_G, -- 7 segment display segments
+        i_Dot => "0010" -- Dot
     );
 
     -- Clock
@@ -80,6 +81,8 @@ begin
         assert(w_A = '0' and w_B = '1' and w_C = '1' and w_D = '0' and w_E = '0' and w_F = '0' and w_G = '0') report "Error: First digit display wrong segments" severity failure;
 
         wait for 10 ns;
+
+        -- TODO: add test cases for the dot.
 
         test_runner_cleanup(runner); -- Simulation ends here
     end process;
