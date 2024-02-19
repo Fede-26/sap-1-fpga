@@ -2,6 +2,7 @@
 
 library ieee;
 use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
 
 entity sap_1_top is
     port (
@@ -18,6 +19,10 @@ architecture rtl of sap_1_top is
     signal r_Reg_B : std_logic_vector(7 downto 0); -- General purpose register B
     signal r_Reg_MAR : std_logic_vector(3 downto 0); -- Memory address register (4-bit)
 
+    -- Program counter
+    signal r_Program_Counter : std_logic_vector(3 downto 0); -- Program counter (4-bit)
+    signal r_Program_Counter_Enable : std_logic; -- Enable signal for the program counter
+
     -- ALU
     signal w_ALU_Out : std_logic_vector(7 downto 0); -- Output of the ALU
 
@@ -29,6 +34,7 @@ architecture rtl of sap_1_top is
     signal w_Bus : std_logic_vector(7 downto 0);
     signal r_Bus_Enable_ALU : std_logic := '0'; -- Enable the bus to be driven by the ALU
     signal r_Bus_Enable_RAM : std_logic := '0'; -- Enable the bus to be driven by the RAM
+    signal r_Bus_Enable_PC : std_logic := '0'; -- Enable the bus to be driven by the program counter
 
     -- Flags
     signal w_Carry : std_logic; -- Carry flag (set if the ALU operation results in a carry)
@@ -70,6 +76,17 @@ begin
     -- Bus
     w_Bus <= w_ALU_Out when r_Bus_Enable_ALU = '1' else
         w_RAM_Out when r_Bus_Enable_RAM = '1' else
+        ("0000" & r_Program_Counter) when r_Bus_Enable_PC = '1' else
         (others => 'Z');
+
+    -- Program counter
+    Process_Counter : process (w_Clk)
+    begin
+        if rising_edge(w_Clk) then
+            if r_Program_Counter_Enable = '1' then
+                r_Program_Counter <= std_logic_vector(to_unsigned(to_integer(unsigned( r_Program_Counter )) + 1, 4));
+            end if;
+        end if;
+    end process Process_Counter;
 
 end rtl;
