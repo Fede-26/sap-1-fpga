@@ -26,7 +26,7 @@ begin
         if (i_Reset = '1') then
             r_Counter <= 0;
             r_Clk <= '0';
-        elsif (i_Clk'event and i_Clk = '1') then
+        elsif rising_edge(i_Clk) then
             r_Counter <= r_Counter + 1;
             if (r_Counter = DIVIDER/2) then
                 r_Clk <= not r_Clk;
@@ -34,6 +34,6 @@ begin
             end if;
         end if;
     end process;
-    o_Clk <= r_Clk;
+    o_Clk <= r_Clk and i_Clk_En;
     
 end rtl;
